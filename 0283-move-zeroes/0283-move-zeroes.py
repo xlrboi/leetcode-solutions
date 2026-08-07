@@ -10,5 +10,5 @@ class Solution:
         for i in range(n_lst):
             nums[i] = lst[i]
 
-        for i in range(n_lst,n):
+        for i in range(n_lst, n):
             nums[i] = 0
