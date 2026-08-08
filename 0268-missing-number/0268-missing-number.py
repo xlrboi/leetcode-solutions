@@ -1,13 +1,9 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         n = len(nums)
-        freq = dict()
-        for i in range(0, n+1):
-            freq[i] = 0
+        ori_sum = int((n * (n+1))/2)
+        sum = 0
+        for i in range(n):
+            sum += nums[i]
 
-        for num in nums:
-            freq[num] += 1
-
-        for k, v in freq.items():
-            if v == 0:
-                return k
+        return ori_sum - sum
