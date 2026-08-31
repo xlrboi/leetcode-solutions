@@ -2,12 +2,7 @@ class Solution:
     def rotateString(self, s: str, goal: str) -> bool:
         if len(s) != len(goal):
             return False
-
-        curr_s = s
-        n = len(curr_s)
-        for i in range(n):
-            if curr_s == goal:
-                return True
-            curr_s = curr_s[-1] + curr_s[:-1]
-
+        new_s = s + s
+        if goal in new_s:
+            return True
         return False
