@@ -1,2 +1,5 @@
 /* Write your T-SQL query statement below */
-select p.product_name, s.year, s.price from Product as p inner join Sales as s on p.product_id = s.product_id
+SELECT P.product_name, S.year, S.price
+FROM Sales AS S
+LEFT JOIN Product AS P
+ON S.product_id = P.product_id
