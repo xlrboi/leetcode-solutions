@@ -1,17 +1,14 @@
 class Solution:
-    def func(self, index, nums, dp):
-        if index == 0:
-            return nums[index]
-        if index < 0:
-            return 0
-        if dp[index] != -1:
-            return dp[index]
-        p = nums[index] + self.func(index - 2, nums, dp)
-        np = 0 + self.func(index - 1, nums, dp)
-        dp[index] = max(p,np)
-
-        return dp[index]
 
     def rob(self, nums: list[int]) -> int:
         dp = [-1] * (len(nums))
-        return self.func(len(nums) - 1, nums, dp)
+        dp[0] = nums[0]
+        for i in range(1, len(nums)):
+            if i > 1:
+                p = nums[i] + dp[i - 2]
+            else:
+                p = 0 + nums[i]
+
+            np = 0 + dp[i - 1]
+            dp[i] = max(p, np)
+        return dp[len(nums) - 1]
