@@ -1,16 +1,15 @@
 class Solution:
     def pivotIndex(self, nums: list[int]) -> int:
         n = len(nums)
-        prefix = [0] * n
-        suffix = [0] * n
-        for i in range(1,n):
-            prefix[i] = prefix[i - 1] + nums[i - 1]
+        sumi = sum(nums)
+        left = 0
+        for i in range(n):
+            right = sumi - left - nums[i]
 
-        for i in range(n-2, -1, -1):
-            suffix[i] = suffix[i + 1] + nums[i + 1]
+            if left == right:
+                return i 
 
-        i = 0
-        while i < n and prefix[i] != suffix[i]:
-            i += 1
+            left += nums[i]
 
-        return i if i < n else -1
+        return -1 
+
