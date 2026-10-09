@@ -5,28 +5,26 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversal(self, root: TreeNode | None) -> list[int]:
         res = []
+        
+        def func(root):
+            if root is None:
+                return
 
-        if root is None:
-            return res
+            stk = [root]
+            while stk:
+                node = stk.pop()
+                res.append(node.val)
+    
+                if node.left:
+                    stk.append(node.left)
+                
+                if node.right:
+                    stk.append(node.right)
 
-        st1 = []
-        st2 = []
 
-        st1.append(root)
+        func(root)
+        return res[::-1]
 
-        while len(st1) != 0:
-            root = st1.pop()
-            st2.append(root)
-
-            if root.left is not None:
-                st1.append(root.left)
-
-            if root.right is not None:
-                st1.append(root.right)
-
-        while len(st2) != 0:
-            res.append(st2.pop().val)
-
-        return res        
+            
