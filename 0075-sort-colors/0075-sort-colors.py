@@ -3,17 +3,20 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        left = 0
-        right = len(nums)-1
-        i = 0
-
-        while i <= right:
-            if nums[i] == 1:
-                i+=1
-            elif nums[i] == 0:
-                nums[i], nums[left] =  nums[left], nums[i]
-                left+=1
-                i+=1 
+        zeros = 0
+        ones = 0 
+        twos = 0
+        for num in nums:
+            if num == 0:
+                zeros += 1
+            elif num == 1:
+                ones += 1
             else:
-                nums[i], nums[right] = nums[right],nums[i]
-                right-=1
+                twos += 1
+
+        for i in range(zeros):
+            nums[i] = 0
+        for j in range(zeros, zeros + ones):
+            nums[j] = 1
+        for k in range(zeros + ones, len(nums)):
+            nums[k] = 2
