@@ -1,13 +1,17 @@
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        n = len(nums)
-        tot_sub = 2**n
-        result = []
-        for num in range(0, tot_sub):
-            lst = []
-            for i in range(n):
-                if(num & (1<<i)) != 0:
-                    lst.append(nums[i])
-            result.append(lst)
+    def func(self, index, nums, subset, ans):
+        if index >= len(nums):
+            ans.append(subset.copy())
+            return
+        subset.append(nums[index])
 
-        return result
+        self.func(index + 1, nums, subset, ans)
+        subset.pop()
+        self.func(index + 1, nums, subset, ans)
+
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        subset = []
+        self.func(0, nums, subset, ans)
+        return ans
