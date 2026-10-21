@@ -1,18 +1,25 @@
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
-        res = []
+    def func(self,index, brackets, result, total):
+        if index >= len(brackets):
+            if total == 0:
+                result.append("".join(brackets))
+            return
 
-        def helper(s, open, close):
-            if len(s) == n * 2:
-                res.append(s)
-                return
+        if total > len(brackets) // 2:
+            return
 
-            if open < n:
-                helper(s + "(", open + 1, close)
+        if total < 0:
+            return 
 
-            if close < open:
-                helper(s + ")", open, close + 1)
+        brackets[index] = "("
+        Sum = total + 1
+        self.func(index + 1, brackets, result, Sum)
+        brackets[index] = ")"
+        Sum = total - 1
+        self.func(index + 1, brackets, result, Sum)
 
-        helper("", 0, 0)
-
-        return res
+    def generateParenthesis(self, n: int) -> list[str]:
+        brackets = [""] * ( n * 2 )
+        result = []
+        self.func(0, brackets, result, 0)
+        return result
