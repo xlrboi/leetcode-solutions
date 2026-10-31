@@ -1,15 +1,17 @@
 class Solution:
     def fib(self, n: int) -> int:
-        dp = [-1] * (n + 1)
+        prev2 = 0
+        prev = 1
+        if n == 0:
+            return prev2
 
-        def fibo(n, dp):
-            if n <= 1:
-                return n
+        elif n == 1:
+            return prev
+        
+        else:
+            for _ in range(2, n + 1):
+                curr = prev + prev2
+                prev2 = prev
+                prev = curr
 
-            if dp[n] != -1:
-                return dp[n]
-
-            dp[n] = fibo(n - 1, dp) + fibo(n - 2, dp)
-            return dp[n]
-
-        return fibo(n, dp)
+        return prev
